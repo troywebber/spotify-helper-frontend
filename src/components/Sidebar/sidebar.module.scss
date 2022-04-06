@@ -1,0 +1,50 @@
+.sidebar {
+  height: 100vh;
+  width: 13em;
+  background-color: #000000;
+  color: darkgrey;
+
+  a:hover {
+    color: #ffffff;
+  }
+
+  a:active {
+    text-decoration: underline;
+  }
+}
+
+.homeSearchLibrary {
+  padding: 1em;
+  border-bottom: solid 1px gray;
+}
+
+.homeSearchLibraryLinks {
+  margin-left: 0.5rem;
+}
+
+.home {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.library {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.playlists {
+  padding: 1em;
+  overflow: scroll;
+  height: 57%;
+}
