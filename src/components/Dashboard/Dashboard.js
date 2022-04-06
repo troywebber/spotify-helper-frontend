@@ -6,7 +6,7 @@ function Dashboard({ code }) {
 
   return (
     <>
-      <Sidebar />
+      <Sidebar accessToken={accessToken} />
     </>
   );
 }

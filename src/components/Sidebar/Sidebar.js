@@ -1,4 +1,9 @@
 import scss from "../Sidebar/sidebar.module.scss";
+import SpotifyWebApi from "spotify-web-api-node";
+import { useEffect, useState } from "react";
+
+const spotifyApi = new SpotifyWebApi();
+
 import {
   BsHouse,
   BsSearch,
@@ -6,7 +11,20 @@ import {
   BsFillEmojiHeartEyesFill,
 } from "react-icons/bs";
 
-export default function Sidebar() {
+export default function Sidebar({ accessToken }) {
+  const [playlists, setPlaylists] = useState([]);
+
+  useEffect(() => {
+    spotifyApi.setAccessToken(accessToken);
+  }, [accessToken]);
+
+  useEffect(() => {
+    if (accessToken)
+      spotifyApi.getUserPlaylists().then((data) => {
+        setPlaylists(data.body.items);
+      });
+  }, [accessToken]);
+
   return (
     <div className={scss.sidebar}>
       <div className={scss.homeSearchLibrary}>
@@ -37,20 +55,11 @@ export default function Sidebar() {
         </div>
       </div>
       <div className={scss.playlists}>
-        <div>
-          <p>
-            <a>PLAYLIST</a>
+        {playlists.map((playlist) => (
+          <p key={playlist.name}>
+            <a>{playlist.name}</a>
           </p>
-          <p>
-            <a>PLAYLIST</a>
-          </p>
-          <p>
-            <a>PLAYLIST</a>
-          </p>
-          <p>
-            <a>PLAYLIST</a>
-          </p>
-        </div>
+        ))}
       </div>
     </div>
   );
