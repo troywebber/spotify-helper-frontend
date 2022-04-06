@@ -10,9 +10,7 @@ export default function Sidebar() {
   return (
     <div className={scss.sidebar}>
       <div className={scss.homeSearchLibrary}>
-        <button className={scss.signInButton} onClick={console.log("clicked")}>
-          Sign out
-        </button>
+        <button className={scss.signInButton}>Sign out</button>
         <div className={scss.home}>
           <BsHouse />
           <h3 className={scss.homeSearchLibraryLinks}>
