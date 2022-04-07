@@ -1,21 +1,20 @@
 import scss from "../Sidebar/sidebar.module.scss";
 import SpotifyWebApi from "spotify-web-api-node";
 import { useEffect, useState } from "react";
-
-const spotifyApi = new SpotifyWebApi();
-
+import { useRecoilState } from "recoil";
 import {
   BsHouse,
   BsSearch,
   BsBook,
   BsFillEmojiHeartEyesFill,
 } from "react-icons/bs";
+import { currentPlaylist } from "../../../atoms/playlistAtom";
+
+const spotifyApi = new SpotifyWebApi();
 
 export default function Sidebar({ accessToken }) {
-  const [currentPlaylist, setCurrentPlaylist] = useState(null);
+  const [playlist, setCurrentPlaylist] = useRecoilState(currentPlaylist);
   const [playlists, setPlaylists] = useState([]);
-
-  console.log(currentPlaylist, "current playlist");
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
