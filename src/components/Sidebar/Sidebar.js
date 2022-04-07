@@ -12,7 +12,10 @@ import {
 } from "react-icons/bs";
 
 export default function Sidebar({ accessToken }) {
+  const [currentPlaylist, setCurrentPlaylist] = useState(null);
   const [playlists, setPlaylists] = useState([]);
+
+  console.log(currentPlaylist, "current playlist");
 
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
@@ -61,7 +64,7 @@ export default function Sidebar({ accessToken }) {
       <div className={scss.playlists}>
         {playlists.map((playlist) => (
           <p key={playlist.name}>
-            <a>{playlist.name}</a>
+            <a onClick={() => setCurrentPlaylist(playlist)}>{playlist.name}</a>
           </p>
         ))}
       </div>
