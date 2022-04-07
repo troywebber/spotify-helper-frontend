@@ -58,7 +58,7 @@ export default function Main({ accessToken }) {
 
   return (
     <div className={scss.mainContainer} style={{ background: gradient }}>
-      <h1>hello</h1>
+      <h1>Please select a playlist from the sidebar to load information</h1>
     </div>
   );
 }
