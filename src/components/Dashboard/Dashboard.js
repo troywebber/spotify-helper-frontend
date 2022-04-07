@@ -5,6 +5,7 @@ import scss from "./dashboard.module.scss";
 
 function Dashboard({ code }) {
   const accessToken = useAuth(code);
+  console.log(accessToken, "accesstoken");
 
   return (
     <div className={scss.dashboard}>

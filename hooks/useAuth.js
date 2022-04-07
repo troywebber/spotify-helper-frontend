@@ -7,6 +7,7 @@ export default function useAuth(code) {
   const [expiresIn, setExpiresIn] = useState();
 
   useEffect(() => {
+    console.log(code, "code");
     axios
       .post("https://troy-spotify-backend.herokuapp.com/login", {
         code,
@@ -18,8 +19,8 @@ export default function useAuth(code) {
         setExpiresIn(res.data.expiresIn);
         window.history.pushState({}, null, "/");
       })
-      .catch((error) => {
-        console.log(error, "error");
+      .catch((res) => {
+        console.log(res, "response");
       });
   }, [code]);
 
