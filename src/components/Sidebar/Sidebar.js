@@ -28,7 +28,11 @@ export default function Sidebar({ accessToken }) {
   return (
     <div className={scss.sidebar}>
       <div className={scss.homeSearchLibrary}>
-        <button className={scss.signInButton}>Sign out</button>
+        <button className={scss.signInButton}>
+          <a href="https://www.spotify.com/logout/" target="blank">
+            Sign Out
+          </a>
+        </button>
         <div className={scss.home}>
           <BsHouse />
           <h3 className={scss.homeSearchLibraryLinks}>
