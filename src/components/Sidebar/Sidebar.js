@@ -31,7 +31,7 @@ export default function Sidebar({ accessToken }) {
 
   //logs user out
   const handleLogout = () => {
-    localStorage.removeItem("accessToken");
+    spotifyApi.resetCredentials();
     window.location.reload();
   };
 

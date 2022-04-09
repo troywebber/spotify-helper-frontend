@@ -44,7 +44,7 @@ export default function Main({ accessToken }) {
     getPlaylistTracks();
   }, [playlist]);
 
-  if (typeof playlist != "string") {
+  if (playlist.id) {
     return (
       <div className={scss.mainContainer} style={{ background: gradient }}>
         <div className={scss.topBanner}>
@@ -65,17 +65,15 @@ export default function Main({ accessToken }) {
         </div>
         <div className={scss.playlistTrackBorder}></div>
         <div className={scss.playlistTracks}>
-          {playlistTracks.map((track) => {
-            console.log(track);
+          {playlistTracks.map((track, index, name) => {
             return (
-              <div className={scss.track} key={track.track.name}>
+              <div className={scss.track} key={index}>
                 <Image
                   src={track.track.album.images[0].url}
                   alt="trackImage"
                   width={100}
                   height={100}
                 />
-
                 <p>{track.track.name}</p>
                 <p>{track.track.artists[0].name}</p>
               </div>
