@@ -39,7 +39,7 @@ export default function Main({ accessToken }) {
         spotifyApi.getPlaylistTracks(playlist.id).then((data) => {
           setPlaylistTracks(data.body.items);
         });
-      }, 1000);
+      }, 200);
     };
     getPlaylistTracks();
   }, [playlist]);

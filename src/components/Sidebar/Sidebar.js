@@ -29,6 +29,14 @@ export default function Sidebar({ accessToken }) {
       });
   }, [accessToken]);
 
+  //get users liked songs
+  const getLikedSongs = () => {
+    if (accessToken)
+      spotifyApi.getMySavedTracks({ limit: 50 }).then((data) => {
+        console.log(data);
+      });
+  };
+
   //logs user out
   const handleLogout = () => {
     spotifyApi.resetCredentials();
@@ -62,7 +70,7 @@ export default function Sidebar({ accessToken }) {
         <div className={scss.library}>
           <BsFillEmojiHeartEyesFill />
           <h3 className={scss.homeSearchLibraryLinks}>
-            <a>LIKED SONGS</a>
+            <a onClick={() => getLikedSongs()}>LIKED SONGS</a>
           </h3>
         </div>
       </div>

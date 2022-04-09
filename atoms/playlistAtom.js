@@ -49,3 +49,8 @@ export const currentPlaylist = atom({
     uri: "spotify:playlist:1N1aVEPnESlZI6nlqTADkr",
   },
 });
+
+export const likedSongs = atom({
+  key: "likedSongs",
+  default: {},
+});
