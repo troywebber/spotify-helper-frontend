@@ -16,10 +16,12 @@ export default function Sidebar({ accessToken }) {
   const [playlist, setCurrentPlaylist] = useRecoilState(currentPlaylist);
   const [playlists, setPlaylists] = useState([]);
 
+  // set spotify access token
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
 
+  //get users playlists
   useEffect(() => {
     if (accessToken)
       spotifyApi.getUserPlaylists().then((data) => {
@@ -27,13 +29,17 @@ export default function Sidebar({ accessToken }) {
       });
   }, [accessToken]);
 
+  //logs user out
+  const handleLogout = () => {
+    localStorage.removeItem("accessToken");
+    window.location.reload();
+  };
+
   return (
     <div className={scss.sidebar}>
       <div className={scss.homeSearchLibrary}>
-        <button className={scss.signInButton}>
-          <a href="https://www.spotify.com/logout/" target="blank">
-            Sign Out
-          </a>
+        <button className={scss.signInButton} onClick={() => handleLogout()}>
+          <a>Sign Out</a>
         </button>
         <div className={scss.home}>
           <BsHouse />

@@ -32,6 +32,7 @@ export default function Main({ accessToken }) {
     spotifyApi.setAccessToken(accessToken);
   }, [accessToken]);
 
+  // get playlist tracks
   useEffect(() => {
     const getPlaylistTracks = async () => {
       setTimeout(() => {
@@ -42,8 +43,6 @@ export default function Main({ accessToken }) {
     };
     getPlaylistTracks();
   }, [playlist]);
-
-  console.log(playlistTracks);
 
   if (typeof playlist != "string") {
     return (
@@ -64,6 +63,7 @@ export default function Main({ accessToken }) {
           <p>TRACK</p>
           <p>ARTIST</p>
         </div>
+        <div className={scss.playlistTrackBorder}></div>
         <div className={scss.playlistTracks}>
           {playlistTracks.map((track) => {
             console.log(track);
@@ -72,8 +72,8 @@ export default function Main({ accessToken }) {
                 <Image
                   src={track.track.album.images[0].url}
                   alt="trackImage"
-                  width={70}
-                  height={70}
+                  width={100}
+                  height={100}
                 />
 
                 <p>{track.track.name}</p>
@@ -86,9 +86,13 @@ export default function Main({ accessToken }) {
     );
   }
 
+  //if no playlist is selected return nothing
   return (
     <div className={scss.mainContainer} style={{ background: gradient }}>
-      <h1>Please select a playlist from the sidebar to load information</h1>
+      <h1>
+        Please select a playlist from the sidebar to load information or refresh
+        the page
+      </h1>
     </div>
   );
 }
