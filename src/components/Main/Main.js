@@ -25,7 +25,7 @@ export default function Main({ accessToken }) {
       );
     };
     randomColor();
-  }, []);
+  }, [playlist]);
 
   // set spotify access token
   useEffect(() => {
