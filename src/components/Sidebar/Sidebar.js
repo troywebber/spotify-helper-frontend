@@ -9,12 +9,16 @@ import {
   BsFillEmojiHeartEyesFill,
 } from "react-icons/bs";
 import { currentPlaylist } from "../../../atoms/playlistAtom";
+import { likedSongAtom } from "../../../atoms/likedSongs.js";
+import { isActiveAtom } from "../../../atoms/isActive.js";
 
 const spotifyApi = new SpotifyWebApi();
 
 export default function Sidebar({ accessToken }) {
   const [playlist, setCurrentPlaylist] = useRecoilState(currentPlaylist);
   const [playlists, setPlaylists] = useState([]);
+  const [likedSongs, setLikedSongs] = useRecoilState(likedSongAtom);
+  const [isActive, setIsActive] = useRecoilState(isActiveAtom);
 
   // set spotify access token
   useEffect(() => {
@@ -33,8 +37,15 @@ export default function Sidebar({ accessToken }) {
   const getLikedSongs = () => {
     if (accessToken)
       spotifyApi.getMySavedTracks({ limit: 50 }).then((data) => {
-        console.log(data);
+        setLikedSongs(data.body.items);
+        setIsActive("likedSongs");
       });
+  };
+
+  //get user current playlist
+  const getCurrentPlaylist = (playlist) => {
+    if (accessToken) setCurrentPlaylist(playlist);
+    setIsActive("playlists");
   };
 
   //logs user out
@@ -77,7 +88,7 @@ export default function Sidebar({ accessToken }) {
       <div className={scss.playlists}>
         {playlists.map((playlist) => (
           <p key={playlist.name}>
-            <a onClick={() => setCurrentPlaylist(playlist)}>{playlist.name}</a>
+            <a onClick={() => getCurrentPlaylist(playlist)}>{playlist.name}</a>
           </p>
         ))}
       </div>
