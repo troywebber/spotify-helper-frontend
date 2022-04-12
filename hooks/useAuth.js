@@ -9,7 +9,7 @@ export default function useAuth(code) {
   //post request with code to get access token / refresh token / expires in
   useEffect(() => {
     axios
-      .post("http://localhost:3001/login", {
+      .post("https://troy-spotify-backend.herokuapp.com/login", {
         code,
       })
       .then((res) => {
@@ -29,7 +29,7 @@ export default function useAuth(code) {
     if (!refreshToken || !expiresIn) return;
     const interval = setInterval(() => {
       axios
-        .post("http://localhost:3001/refresh", {
+        .post("https://troy-spotify-backend.herokuapp.com/refresh", {
           refreshToken,
         })
         .then((res) => {
