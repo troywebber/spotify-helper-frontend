@@ -65,7 +65,7 @@ export default function Main({ accessToken }) {
         </div>
         <div className={scss.playlistTrackBorder}></div>
         <div className={scss.playlistTracks}>
-          {playlistTracks.map((track, index, name) => {
+          {playlistTracks.map((track, index) => {
             return (
               <div className={scss.track} key={index}>
                 <Image

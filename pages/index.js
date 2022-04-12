@@ -5,6 +5,7 @@ import Login from "../src/components/Login/Login.js";
 export default function Home() {
   const [code, setCode] = useState("");
 
+  //sets the code provided by spotify after login
   useEffect(() => {
     function getCode() {
       const code = new URLSearchParams(window.location.search).get("code");

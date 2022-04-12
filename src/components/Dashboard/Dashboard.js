@@ -6,6 +6,10 @@ import scss from "./dashboard.module.scss";
 function Dashboard({ code }) {
   const accessToken = useAuth(code);
 
+  if (!accessToken) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className={scss.dashboard}>
       <Sidebar accessToken={accessToken} />

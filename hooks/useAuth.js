@@ -6,6 +6,7 @@ export default function useAuth(code) {
   const [refreshToken, setRefreshToken] = useState();
   const [expiresIn, setExpiresIn] = useState();
 
+  //post request with code to get access token / refresh token / expires in
   useEffect(() => {
     axios
       .post("https://troy-spotify-backend.herokuapp.com/login", {
@@ -23,6 +24,7 @@ export default function useAuth(code) {
       });
   }, [code]);
 
+  //if no refresh token then get new access token and refresh token
   useEffect(() => {
     if (!refreshToken || !expiresIn) return;
     const interval = setInterval(() => {
