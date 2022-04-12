@@ -11,6 +11,7 @@ import {
 import { currentPlaylist } from "../../../atoms/playlistAtom";
 import { likedSongAtom } from "../../../atoms/likedSongs.js";
 import { isActiveAtom } from "../../../atoms/isActive.js";
+import { albumsAtom } from "../../../atoms/albumsAtom.js";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -18,6 +19,7 @@ export default function Sidebar({ accessToken }) {
   const [playlist, setCurrentPlaylist] = useRecoilState(currentPlaylist);
   const [playlists, setPlaylists] = useState([]);
   const [likedSongs, setLikedSongs] = useRecoilState(likedSongAtom);
+  const [albums, setAlbums] = useRecoilState(albumsAtom);
   const [isActive, setIsActive] = useRecoilState(isActiveAtom);
 
   // set spotify access token
@@ -48,6 +50,26 @@ export default function Sidebar({ accessToken }) {
     setIsActive("playlists");
   };
 
+  //get user current albums
+  const getAlbums = () => {
+    if (accessToken)
+      spotifyApi
+        .getMySavedAlbums({
+          limit: 8,
+          offset: 0,
+        })
+        .then(
+          function (data) {
+            // Output items
+            setAlbums(data.body.items);
+            setIsActive("albums");
+          },
+          function (err) {
+            console.log("Something went wrong!", err);
+          }
+        );
+  };
+
   //logs user out
   const handleLogout = () => {
     spotifyApi.resetCredentials();
@@ -75,7 +97,7 @@ export default function Sidebar({ accessToken }) {
         <div className={scss.library}>
           <BsBook />
           <h3 className={scss.homeSearchLibraryLinks}>
-            <a>LIBRARY</a>
+            <a onClick={() => getAlbums()}>LIBRARY</a>
           </h3>
         </div>
         <div className={scss.library}>

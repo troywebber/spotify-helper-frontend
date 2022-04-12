@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import { currentPlaylist } from "../../../atoms/playlistAtom";
 import { likedSongAtom } from "../../../atoms/likedSongs.js";
 import { isActiveAtom } from "../../../atoms/isActive.js";
+import { albumsAtom } from "../../../atoms/albumsAtom.js";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -16,8 +17,8 @@ export default function Main({ accessToken }) {
     "linear-gradient(360deg, rgb(18, 18, 18) 35%, rgb(16, 140, 7))"
   );
   const likedSongs = useRecoilValue(likedSongAtom);
+  const albums = useRecoilValue(albumsAtom);
   const isActive = useRecoilValue(isActiveAtom);
-  console.log(likedSongs);
 
   //random color
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function Main({ accessToken }) {
       );
     };
     randomColor();
-  }, [playlist]);
+  }, [playlist, isActive]);
 
   // set spotify access token
   useEffect(() => {
@@ -125,14 +126,31 @@ export default function Main({ accessToken }) {
         </div>
       </div>
     );
-
-    // return (
-    //   <div className={scss.mainContainer} style={{ background: gradient }}>
-    //     <h1>
-    //       Please select a playlist from the sidebar to load information or refresh
-    //       the page
-    //     </h1>
-    //   </div>
-    // );
+  } else if (isActive === "albums") {
+    return (
+      <div className={scss.mainContainer} style={{ background: "#121212" }}>
+        <h2 className={scss.albumsTitle}>Albums</h2>
+        <div className={scss.albums}>
+          {albums.map((album, index) => {
+            console.log(album.album.artists[0].name);
+            return (
+              <div className={scss.album} key={index}>
+                <div className={scss.albumImage}>
+                  <Image
+                    src={album.album.images[0].url}
+                    alt="albumImage"
+                    width={190}
+                    height={190}
+                    style={{ borderRadius: "7px" }}
+                  />
+                </div>
+                <p className={scss.albumName}>{album.album.name}</p>
+                <p className={scss.artistName}>{album.album.artists[0].name}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
   }
 }
