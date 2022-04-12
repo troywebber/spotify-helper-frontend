@@ -91,7 +91,7 @@ export default function Sidebar({ accessToken }) {
         <div className={scss.search}>
           <BsSearch />
           <h3 className={scss.homeSearchLibraryLinks}>
-            <a>SEARCH</a>
+            <a onClick={() => setIsActive("search")}>SEARCH</a>
           </h3>
         </div>
         <div className={scss.library}>

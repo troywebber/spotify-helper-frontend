@@ -152,11 +152,16 @@ export default function Main({ accessToken }) {
         </div>
       </div>
     );
-  } else {
+  } else if (isActive === "search") {
+    return (
+      <div className={scss.mainContainer} style={{ background: gradient }}>
+        <h1>SEARCH</h1>
+      </div>
+    );
+  } else
     return (
       <div className={scss.mainContainer} style={{ background: gradient }}>
         <h1>PLEASE SELECT A PLAYLIST OR REFRESH THE PAGE</h1>
       </div>
     );
-  }
 }
