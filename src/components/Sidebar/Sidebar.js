@@ -55,7 +55,7 @@ export default function Sidebar({ accessToken }) {
     if (accessToken)
       spotifyApi
         .getMySavedAlbums({
-          limit: 8,
+          limit: 20,
           offset: 0,
         })
         .then(
