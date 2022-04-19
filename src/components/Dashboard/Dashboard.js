@@ -7,7 +7,11 @@ function Dashboard({ code }) {
   const accessToken = useAuth(code);
 
   if (!accessToken) {
-    return <div>Loading...</div>;
+    return (
+      <div className={scss.loading}>
+        <p>Please wait for the dashboad to load 🎵</p>
+      </div>
+    );
   }
 
   return (

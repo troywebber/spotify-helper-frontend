@@ -19,6 +19,8 @@ export default function Main({ accessToken }) {
   const likedSongs = useRecoilValue(likedSongAtom);
   const albums = useRecoilValue(albumsAtom);
   const isActive = useRecoilValue(isActiveAtom);
+  const [searchInput, setSearchInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   //random color
   useEffect(() => {
@@ -49,6 +51,25 @@ export default function Main({ accessToken }) {
     };
     getPlaylistTracks();
   }, [playlist]);
+
+  //handle search input
+  const handleSearchInput = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  //handle search results
+  useEffect(() => {
+    if (searchInput.length > 0) {
+      const getSearchResults = async () => {
+        setTimeout(() => {
+          spotifyApi.search(searchInput, ["track"]).then((data) => {
+            setSearchResults(data.body.tracks.items);
+          });
+        }, 200);
+      };
+      getSearchResults();
+    }
+  }, [searchInput]);
 
   if (isActive === "playlists") {
     return (
@@ -155,7 +176,38 @@ export default function Main({ accessToken }) {
   } else if (isActive === "search") {
     return (
       <div className={scss.mainContainer} style={{ background: gradient }}>
-        <h1>SEARCH</h1>
+        <div className={scss.topBannerSearch}>
+          <input
+            onChange={(e) => handleSearchInput(e)}
+            type="text"
+            className={scss.seachInput}
+            placeholder="Search.."
+          ></input>
+        </div>
+
+        <div className={scss.playlistTrackTitles}>
+          <p>ALBUM</p>
+          <p>TRACK</p>
+          <p>ARTIST</p>
+        </div>
+
+        <div className={scss.playlistTrackBorder}></div>
+        <div className={scss.playlistTracks}>
+          {searchResults.map((track, index) => {
+            return (
+              <div className={scss.track} key={index}>
+                <Image
+                  src={track.album.images[0].url}
+                  alt="trackImage"
+                  width={100}
+                  height={100}
+                />
+                <p>{track.name}</p>
+                <p>{track.artists[0].name}</p>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
   } else

@@ -2,3 +2,16 @@
   display: flex;
   height: 97vh;
 }
+
+.loading {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
