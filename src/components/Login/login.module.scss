@@ -4,16 +4,17 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #1ed760;
+  background: springgreen;
 }
 
 .login {
-  height: 25em;
-  display: flex;
-  flex-direction: column;
-  width: 25em;
-  align-items: center;
-  justify-content: space-evenly;
+  text-align: center;
+  p {
+    font-size: 1.3rem;
+  }
+  .alert {
+    width: 25em;
+  }
 }
 
 .loginButton {
