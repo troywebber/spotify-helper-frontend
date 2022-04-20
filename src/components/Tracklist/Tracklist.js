@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import scss from "./Tracklist.module.scss";
+import scss from "../Tracklist/tracklist.module.scss";
 
 function Tracklist({ results }) {
   return (
