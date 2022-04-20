@@ -154,7 +154,6 @@ export default function Main({ accessToken }) {
         <h2 className={scss.albumsTitle}>Albums</h2>
         <div className={scss.albums}>
           {albums.map((album, index) => {
-            console.log(album.album.artists[0].name);
             return (
               <div className={scss.album} key={index}>
                 <div className={scss.albumImage}>

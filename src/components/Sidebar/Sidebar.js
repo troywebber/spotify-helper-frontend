@@ -59,12 +59,12 @@ export default function Sidebar({ accessToken }) {
           offset: 0,
         })
         .then(
-          function (data) {
+          (data) => {
             // Output items
             setAlbums(data.body.items);
             setIsActive("albums");
           },
-          function (err) {
+          (err) => {
             console.log("Something went wrong!", err);
           }
         );
