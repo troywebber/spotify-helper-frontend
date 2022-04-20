@@ -7,6 +7,7 @@ import { currentPlaylist } from "../../../atoms/playlistAtom";
 import { likedSongAtom } from "../../../atoms/likedSongs.js";
 import { isActiveAtom } from "../../../atoms/isActive.js";
 import { albumsAtom } from "../../../atoms/albumsAtom.js";
+import Tracklist from "../Tracklist/Tracklist";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -184,36 +185,14 @@ export default function Main({ accessToken }) {
             placeholder="Search.."
           ></input>
         </div>
-
-        <div className={scss.playlistTrackTitles}>
-          <p>ALBUM</p>
-          <p>TRACK</p>
-          <p>ARTIST</p>
-        </div>
-
-        <div className={scss.playlistTrackBorder}></div>
-        <div className={scss.playlistTracks}>
-          {searchResults.map((track, index) => {
-            return (
-              <div className={scss.track} key={index}>
-                <Image
-                  src={track.album.images[0].url}
-                  alt="trackImage"
-                  width={100}
-                  height={100}
-                />
-                <p>{track.name}</p>
-                <p>{track.artists[0].name}</p>
-              </div>
-            );
-          })}
-        </div>
+        <Tracklist results={searchResults} />
       </div>
     );
-  } else
+  } else {
     return (
       <div className={scss.mainContainer} style={{ background: gradient }}>
         <h1>PLEASE SELECT A PLAYLIST OR REFRESH THE PAGE</h1>
       </div>
     );
+  }
 }

@@ -1,0 +1,77 @@
+.playlistImage {
+  margin-left: 4em;
+}
+
+.playlistInfo {
+  width: 70%;
+  text-align: center;
+
+  p {
+    font-size: 13px;
+    color: #ffffff;
+  }
+}
+
+.playlistName {
+  font-size: 6em;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
+
+.playlistOwner {
+  display: flex;
+  p {
+    font-size: 13px;
+    color: #ffffff;
+  }
+  p:nth-child(2) {
+    margin-left: 1em;
+    font-size: 13px;
+    color: #ffffff;
+  }
+  p:nth-child(3) {
+    margin-left: 1em;
+    font-size: 13px;
+    color: #ffffff;
+  }
+}
+
+.playlistTrackTitles {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 0px 0px;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: ". . . .";
+  margin-bottom: 1em;
+  justify-items: center;
+  p {
+    color: #ffffff;
+  }
+}
+
+.playlistTrackBorder {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2em;
+  border-bottom: 1px solid #ffffff33;
+  height: 1px;
+  width: 85%;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: ". . . .";
+  margin-bottom: 1em;
+  justify-items: center;
+  align-items: center;
+  p {
+    color: #ffffff;
+    text-align: center;
+  }
+}
