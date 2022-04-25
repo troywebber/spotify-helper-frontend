@@ -8,6 +8,7 @@ import { likedSongAtom } from "../../../atoms/likedSongs.js";
 import { isActiveAtom } from "../../../atoms/isActive.js";
 import { albumsAtom } from "../../../atoms/albumsAtom.js";
 import Tracklist from "../Tracklist/Tracklist";
+import DuplicateFinder from "../DuplicateFinder/DuplicateFinder";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -190,7 +191,7 @@ export default function Main({ accessToken }) {
   } else {
     return (
       <div className={scss.mainContainer} style={{ background: gradient }}>
-        <h1>PLEASE SELECT A PLAYLIST OR REFRESH THE PAGE</h1>
+        <DuplicateFinder accessToken={accessToken} />
       </div>
     );
   }
