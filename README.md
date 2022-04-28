@@ -12,7 +12,7 @@ This is my most recent project, currently working on replicating the Spotify web
 ### Installing
 
 1. Install Node.js from https://nodejs.org/en/
-2. Clone both this repo https://github.com/troywebber/spotify-helper-frontend.git
+2. Clone both this repo https://github.com/troywebber/spotify-helper-frontend.git   
 3.Also Clone this repo https://github.com/troywebber/spotify-helper-backend.git
 4. Open both repositories in the integrated development environment ( preferably Visual Studio Code)
 5. Paste in the code below for both the repositories.
