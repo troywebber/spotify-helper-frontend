@@ -24,6 +24,15 @@ The demo can be viewed here : https://spotify-helper-frontend.netlify.app/
     ```sh
     npm install
     ```
+6. [Register a Spotify App](https://developer.spotify.com/dashboard/applications) and add `http://localhost:8888/callback` as a Redirect URI in the app settings
+7. Create an `.env` file in the root of the project
+9. Use the envirement variables below for both the front end deployment and back end deployment. you can recieve the CLIENT_ID and CLIENT_SECRET from your created application on the spotify dashboard 
+
+   ```bash
+   CLIENT_ID=XXXXX
+   CLIENT_SECRET=XXXXX
+   REDIRECT_URI=http://localhost:3000
+   ```
 
 ### Executing program
 
