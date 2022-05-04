@@ -9,7 +9,7 @@ function Dashboard({ code }) {
   if (!accessToken) {
     return (
       <div className={scss.loading}>
-        <p>Please wait for the dashboad to load 🎵</p>
+        <p>Please wait for the dashboard to load 🎵</p>
       </div>
     );
   }
