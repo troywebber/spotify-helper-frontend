@@ -1,8 +1,7 @@
 .mainContainer {
-  background-color: rgb(255, 255, 255);
   flex-grow: 2;
-  overflow: auto;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 .topBanner {
@@ -150,6 +149,18 @@
     .albums {
       grid-template-columns: 1fr 1fr;
     }
+  }
+
+  @media screen and (max-width: 650px) {
+    .albums {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .playlistName {
+    font-size: 4em;
   }
 }
 
