@@ -26,6 +26,7 @@ function DuplicateFinder({ accessToken }) {
   //handlebutton click console log playlist id
   const handlePlaylistClick = (playlist) => {
     setSelectedPlaylist(playlist.id);
+    console.log("selected playlist", playlist.id);
   };
 
   //fetch songs from selected playlist without the 100 song limit
@@ -56,6 +57,22 @@ function DuplicateFinder({ accessToken }) {
     }
   }, [selectedPlaylist]);
 
+  //song comparision function to find duplicates
+  useEffect(() => {
+    if (songs.length > 0) {
+      const compareSongs = (songs) => {
+        const songNames = songs.map((song) => song.track.name);
+        const duplicates = songNames.filter((name, index) => {
+          return songNames.indexOf(name) !== index;
+        });
+        duplicates.forEach((duplicate) => {
+          console.log(duplicate);
+        });
+      };
+      compareSongs(songs);
+    }
+  }, [songs]);
+
   if (selectedPlaylist && songs.length > 0) {
     return (
       <div>
@@ -68,7 +85,6 @@ function DuplicateFinder({ accessToken }) {
         <div className={scss.playlistTrackBorder}></div>
         <div className={scss.playlistTracks}>
           {songs.map((track, index) => {
-            console.log(track);
             return (
               <div className={scss.track} key={index}>
                 <Image
