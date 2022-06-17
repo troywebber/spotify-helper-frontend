@@ -9,6 +9,7 @@ function DuplicateFinder({ accessToken }) {
   const [playlists, setPlaylists] = useState([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState(null);
   const [songs, setSongs] = useState([]);
+  const [duplicateSongs, setDuplicateSongs] = useState([]);
 
   // set spotify access token
   useEffect(() => {
@@ -22,6 +23,11 @@ function DuplicateFinder({ accessToken }) {
         setPlaylists(data.body.items);
       });
   }, [accessToken]);
+
+  const handleBackClick = () => {
+    setSelectedPlaylist(null);
+    setDuplicateSongs([]);
+  };
 
   //handlebutton click console log playlist id
   const handlePlaylistClick = (playlist) => {
@@ -57,26 +63,48 @@ function DuplicateFinder({ accessToken }) {
     }
   }, [selectedPlaylist]);
 
-  //song comparision function to find duplicates
+  //song comparision function to find duplicate songs
   useEffect(() => {
     if (songs.length > 0) {
-      const compareSongs = (songs) => {
+      const findDuplicateSongs = (songs) => {
         const songNames = songs.map((song) => song.track.name);
         const duplicates = songNames.filter((name, index) => {
           return songNames.indexOf(name) !== index;
         });
         duplicates.forEach((duplicate) => {
           console.log(duplicate);
+
+          let duplicateSong = songs.find(
+            (song) => song.track.name === duplicate
+          );
+          setDuplicateSongs([...duplicateSongs, duplicateSong]);
         });
       };
-      compareSongs(songs);
+      findDuplicateSongs(songs);
     }
   }, [songs]);
+
+  console.log("duplicate songs", duplicateSongs);
+
+  // spotifyApi
+  //   .removeTracksFromPlaylistByPosition(
+  //     playlistId,
+  //     position
+  //     snapshotId,
+  //   )
+  //   .then(
+  //     function (data) {
+  //       console.log("Tracks removed from playlist!");
+  //     },
+  //     function (err) {
+  //       console.log("Something went wrong!", err);
+  //     }
+  //   );
 
   if (selectedPlaylist && songs.length > 0) {
     return (
       <div>
-        <button onClick={() => setSelectedPlaylist(null)}>Back</button>
+        <button onClick={() => handleBackClick(null)}>Back</button>
         <div className={scss.playlistTrackTitles}>
           <p>ALBUM</p>
           <p>TRACK</p>
@@ -84,7 +112,7 @@ function DuplicateFinder({ accessToken }) {
         </div>
         <div className={scss.playlistTrackBorder}></div>
         <div className={scss.playlistTracks}>
-          {songs.map((track, index) => {
+          {duplicateSongs.map((track, index) => {
             return (
               <div className={scss.track} key={index}>
                 <Image
