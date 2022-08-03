@@ -9,9 +9,9 @@ import {
   BsFillEmojiHeartEyesFill,
 } from "react-icons/bs";
 import { currentPlaylist } from "../../../atoms/playlistAtom";
-import { likedSongAtom } from "../../../atoms/likedSongs.js";
-import { isActiveAtom } from "../../../atoms/isActive.js";
-import { albumsAtom } from "../../../atoms/albumsAtom.js";
+import { likedSongAtom } from "../../../atoms/likedSongs";
+import { isActiveAtom } from "../../../atoms/isActive";
+import { albumsAtom } from "../../../atoms/albumsAtom";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -20,12 +20,12 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ accessToken }: SidebarProps) {
-  const [playlist, setCurrentPlaylist] = useRecoilState<any>(currentPlaylist);
+  const [playlist, setCurrentPlaylist] = useRecoilState(currentPlaylist);
   const [playlists, setPlaylists] = useState<
     SpotifyApi.PlaylistObjectSimplified[]
   >([]);
-  const [likedSongs, setLikedSongs] = useRecoilState<any>(likedSongAtom);
-  const [albums, setAlbums] = useRecoilState<any>(albumsAtom);
+  const [likedSongs, setLikedSongs] = useRecoilState(likedSongAtom);
+  const [albums, setAlbums] = useRecoilState(albumsAtom);
   const [isActive, setIsActive] = useRecoilState(isActiveAtom);
 
   // set spotify access token

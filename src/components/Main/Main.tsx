@@ -1,20 +1,23 @@
 import scss from "./main.module.scss";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import SpotifyWebApi from "spotify-web-api-node";
 import { useRecoilValue } from "recoil";
 import { currentPlaylist } from "../../../atoms/playlistAtom";
-import { likedSongAtom } from "../../../atoms/likedSongs.js";
-import { isActiveAtom } from "../../../atoms/isActive.js";
-import { albumsAtom } from "../../../atoms/albumsAtom.js";
+import { likedSongAtom } from "../../../atoms/likedSongs";
+import { isActiveAtom } from "../../../atoms/isActive";
+import { albumsAtom } from "../../../atoms/albumsAtom";
 import Tracklist from "../Tracklist/Tracklist";
 import DuplicateFinder from "../DuplicateFinder/DuplicateFinder";
+import { MainProps, PlaylistTracks, SearchResults } from "../../types";
 
 const spotifyApi = new SpotifyWebApi();
 
-export default function Main({ accessToken }) {
+export default function Main({ accessToken }: MainProps) {
   const playlist = useRecoilValue(currentPlaylist);
-  const [playlistTracks, setPlaylistTracks] = useState([]);
+  const [playlistTracks, setPlaylistTracks] = useState<
+    PlaylistTracks[] | SpotifyApi.PlaylistTrackObject[]
+  >([]);
   const [gradient, setGradient] = useState(
     "linear-gradient(360deg, rgb(18, 18, 18) 35%, rgb(16, 140, 7))"
   );
@@ -22,7 +25,9 @@ export default function Main({ accessToken }) {
   const albums = useRecoilValue(albumsAtom);
   const isActive = useRecoilValue(isActiveAtom);
   const [searchInput, setSearchInput] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<
+    SearchResults[] | SpotifyApi.TrackObjectFull[]
+  >([]);
 
   //random color
   useEffect(() => {
@@ -55,7 +60,7 @@ export default function Main({ accessToken }) {
   }, [playlist]);
 
   //handle search input
-  const handleSearchInput = (e) => {
+  const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchInput(e.target.value);
   };
 
@@ -65,7 +70,7 @@ export default function Main({ accessToken }) {
       const getSearchResults = async () => {
         setTimeout(() => {
           spotifyApi.search(searchInput, ["track"]).then((data) => {
-            setSearchResults(data.body.tracks.items);
+            setSearchResults(data?.body?.tracks?.items as SearchResults[]);
           });
         }, 200);
       };
@@ -73,13 +78,15 @@ export default function Main({ accessToken }) {
     }
   }, [searchInput]);
 
+  console.log(playlistTracks, "playlistTracks");
+
   if (isActive === "playlists") {
     return (
       <div className={scss.mainContainer} style={{ background: gradient }}>
         <div className={scss.topBanner}>
           <div className={scss.playlistImage}>
             <Image
-              src={playlist.images[0].url}
+              src={playlist?.images[0]?.url}
               alt="playlistImage"
               width={220}
               height={220}
@@ -98,13 +105,13 @@ export default function Main({ accessToken }) {
             return (
               <div className={scss.track} key={index}>
                 <Image
-                  src={track.track.album.images[0].url}
+                  src={track?.track?.album.images[0].url || ""}
                   alt="trackImage"
                   width={100}
                   height={100}
                 />
-                <p>{track.track.name}</p>
-                <p>{track.track.artists[0].name}</p>
+                <p>{track?.track?.name}</p>
+                <p>{track?.track?.artists[0].name}</p>
               </div>
             );
           })}

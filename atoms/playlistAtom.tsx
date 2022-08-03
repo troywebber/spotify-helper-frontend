@@ -1,6 +1,7 @@
 import { atom } from "recoil";
+import { CurrentPlaylist } from "../src/types";
 
-export const currentPlaylist = atom({
+export const currentPlaylist = atom<CurrentPlaylist>({
   key: "currentPlaylist",
   default: {
     collaborative: false,

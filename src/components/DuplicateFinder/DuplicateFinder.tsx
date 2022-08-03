@@ -14,8 +14,6 @@ function DuplicateFinder({ accessToken }: duplicateFinderProps) {
   const [songs, setSongs] = useState<Songs[]>([]);
   const [duplicateSongs, setDuplicateSongs] = useState<DuplicateSongs[]>([]);
 
-  console.log(songs, "songs");
-
   // set spotify access token
   useEffect(() => {
     spotifyApi.setAccessToken(accessToken);

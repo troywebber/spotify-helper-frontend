@@ -29,7 +29,7 @@
     "src/components/Dashboard/Dashboard.tsx",
     "src/components/DuplicateFinder/DuplicateFinder.tsx",
     "src/components/Login/Login.tsx",
-    "src/components/Main/Main.js",
+    "src/components/Main/Main.tsx",
     "src/components/Sidebar/Sidebar.tsx"
   ],
   "exclude": ["node_modules"]
