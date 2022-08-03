@@ -2,22 +2,19 @@ import scss from "./duplicateFinder.module.scss";
 import SpotifyWebApi from "spotify-web-api-node";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { duplicateFinderProps, DuplicateSongs, Songs } from "../../types";
 
 const spotifyApi = new SpotifyWebApi();
-
-interface duplicateFinderProps {
-  accessToken: string;
-}
 
 function DuplicateFinder({ accessToken }: duplicateFinderProps) {
   const [playlists, setPlaylists] = useState<
     SpotifyApi.PlaylistObjectSimplified[]
   >([]);
   const [selectedPlaylist, setSelectedPlaylist] = useState<null | string>(null);
-  const [songs, setSongs] = useState([]);
-  const [duplicateSongs, setDuplicateSongs] = useState([]);
+  const [songs, setSongs] = useState<Songs[]>([]);
+  const [duplicateSongs, setDuplicateSongs] = useState<DuplicateSongs[]>([]);
 
-  console.log(duplicateSongs, "duplicateSongs");
+  console.log(songs, "songs");
 
   // set spotify access token
   useEffect(() => {
