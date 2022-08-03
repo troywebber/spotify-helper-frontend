@@ -1,6 +1,6 @@
 import useAuth from "../../../hooks/useAuth";
-import Sidebar from "../Sidebar/Sidebar.js";
-import Main from "../Main/Main.js";
+import Sidebar from "../Sidebar/Sidebar";
+import Main from "../Main/Main";
 import scss from "./dashboard.module.scss";
 
 function Dashboard({ code }) {

@@ -5,11 +5,19 @@ import Image from "next/image";
 
 const spotifyApi = new SpotifyWebApi();
 
-function DuplicateFinder({ accessToken }) {
-  const [playlists, setPlaylists] = useState([]);
-  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+interface duplicateFinderProps {
+  accessToken: string;
+}
+
+function DuplicateFinder({ accessToken }: duplicateFinderProps) {
+  const [playlists, setPlaylists] = useState<
+    SpotifyApi.PlaylistObjectSimplified[]
+  >([]);
+  const [selectedPlaylist, setSelectedPlaylist] = useState<null | string>(null);
   const [songs, setSongs] = useState([]);
   const [duplicateSongs, setDuplicateSongs] = useState([]);
+
+  console.log(duplicateSongs, "duplicateSongs");
 
   // set spotify access token
   useEffect(() => {
@@ -30,16 +38,17 @@ function DuplicateFinder({ accessToken }) {
   };
 
   //handlebutton click console log playlist id
-  const handlePlaylistClick = (playlist) => {
+  const handlePlaylistClick = (
+    playlist: SpotifyApi.PlaylistObjectSimplified
+  ) => {
     setSelectedPlaylist(playlist.id);
-    console.log("selected playlist", playlist.id);
   };
 
   //fetch songs from selected playlist without the 100 song limit
   useEffect(() => {
     if (selectedPlaylist !== null) {
-      const getPlaylistTracks = async (selectedPlaylist) => {
-        let tracks = [];
+      const getPlaylistTracks = async (selectedPlaylist: string) => {
+        let tracks: any[] = [];
         let offset = 0;
         let limit = 100;
         let total = 0;
@@ -66,16 +75,16 @@ function DuplicateFinder({ accessToken }) {
   //song comparision function to find duplicate songs
   useEffect(() => {
     if (songs.length > 0) {
-      const findDuplicateSongs = (songs) => {
-        const songNames = songs.map((song) => song.track.name);
-        const duplicates = songNames.filter((name, index) => {
+      const findDuplicateSongs = (songs: any[]) => {
+        const songNames = songs.map(
+          (song: { track: { name: any } }) => song.track.name
+        );
+        const duplicates = songNames.filter((name: any, index: any) => {
           return songNames.indexOf(name) !== index;
         });
-        duplicates.forEach((duplicate) => {
-          console.log(duplicate);
-
+        duplicates.forEach((duplicate: any) => {
           let duplicateSong = songs.find(
-            (song) => song.track.name === duplicate
+            (song: { track: { name: any } }) => song.track.name === duplicate
           );
           setDuplicateSongs([...duplicateSongs, duplicateSong]);
         });
@@ -84,27 +93,10 @@ function DuplicateFinder({ accessToken }) {
     }
   }, [songs]);
 
-  console.log("duplicate songs", duplicateSongs);
-
-  // spotifyApi
-  //   .removeTracksFromPlaylistByPosition(
-  //     playlistId,
-  //     position
-  //     snapshotId,
-  //   )
-  //   .then(
-  //     function (data) {
-  //       console.log("Tracks removed from playlist!");
-  //     },
-  //     function (err) {
-  //       console.log("Something went wrong!", err);
-  //     }
-  //   );
-
   if (selectedPlaylist && songs.length > 0) {
     return (
       <div>
-        <button onClick={() => handleBackClick(null)}>Back</button>
+        <button onClick={() => handleBackClick()}>Back</button>
         <div className={scss.playlistTrackTitles}>
           <p>ALBUM</p>
           <p>TRACK</p>

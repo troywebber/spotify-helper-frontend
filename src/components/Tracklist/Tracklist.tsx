@@ -1,8 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import scss from "../Tracklist/tracklist.module.scss";
+import { Results } from "../../types";
 
-function Tracklist({ results }) {
+interface TracklistProps {
+  results: Results[];
+}
+
+function Tracklist({ results }: TracklistProps) {
   return (
     <div>
       <div className={scss.playlistTrackTitles}>
@@ -12,7 +17,7 @@ function Tracklist({ results }) {
       </div>
       <div className={scss.playlistTrackBorder}></div>
       <div className={scss.playlistTracks}>
-        {results?.map((track, index) => {
+        {results?.map((track: Results, index: React.Key) => {
           return (
             <div className={scss.track} key={index}>
               <Image

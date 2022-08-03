@@ -15,11 +15,17 @@ import { albumsAtom } from "../../../atoms/albumsAtom.js";
 
 const spotifyApi = new SpotifyWebApi();
 
-export default function Sidebar({ accessToken }) {
-  const [playlist, setCurrentPlaylist] = useRecoilState(currentPlaylist);
-  const [playlists, setPlaylists] = useState([]);
-  const [likedSongs, setLikedSongs] = useRecoilState(likedSongAtom);
-  const [albums, setAlbums] = useRecoilState(albumsAtom);
+interface SidebarProps {
+  accessToken: string;
+}
+
+export default function Sidebar({ accessToken }: SidebarProps) {
+  const [playlist, setCurrentPlaylist] = useRecoilState<any>(currentPlaylist);
+  const [playlists, setPlaylists] = useState<
+    SpotifyApi.PlaylistObjectSimplified[]
+  >([]);
+  const [likedSongs, setLikedSongs] = useRecoilState<any>(likedSongAtom);
+  const [albums, setAlbums] = useRecoilState<any>(albumsAtom);
   const [isActive, setIsActive] = useRecoilState(isActiveAtom);
 
   // set spotify access token
@@ -45,7 +51,9 @@ export default function Sidebar({ accessToken }) {
   };
 
   //get user current playlist
-  const getCurrentPlaylist = (playlist) => {
+  const getCurrentPlaylist = (
+    playlist: SpotifyApi.PlaylistObjectSimplified
+  ) => {
     if (accessToken) setCurrentPlaylist(playlist);
     setIsActive("playlists");
   };
@@ -58,16 +66,11 @@ export default function Sidebar({ accessToken }) {
           limit: 20,
           offset: 0,
         })
-        .then(
-          (data) => {
-            // Output items
-            setAlbums(data.body.items);
-            setIsActive("albums");
-          },
-          (err) => {
-            console.log("Something went wrong!", err);
-          }
-        );
+        .then((data) => {
+          // Output items
+          setAlbums(data.body.items);
+          setIsActive("albums");
+        });
   };
 
   //logs user out

@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "types": ["node"],
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/pages/create.tsx",
+    "src/components/ImageDropzone/ImageDropzone.js",
+    "src/components/PostPreview/PostPreview.tsx",
+    "pages/_app.tsx",
+    "pages/index.tsx",
+    "src/components/Tracklist/Tracklist.tsx",
+    "src/components/Dashboard/Dashboard.tsx",
+    "src/components/DuplicateFinder/DuplicateFinder.tsx",
+    "src/components/Login/Login.tsx",
+    "src/components/Main/Main.js",
+    "src/components/Sidebar/Sidebar.tsx"
+  ],
+  "exclude": ["node_modules"]
+}
