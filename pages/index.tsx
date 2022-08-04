@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Dashboard from "../src/components/Dashboard/Dashboard.js";
+import Dashboard from "../src/components/Dashboard/Dashboard";
 import Login from "../../spotify-helper-frontend-main/src/components/Login/Login";
 
 export default function Home() {

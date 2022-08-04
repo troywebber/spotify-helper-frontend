@@ -17,7 +17,7 @@ function Tracklist({ results }: TracklistProps) {
       </div>
       <div className={scss.playlistTrackBorder}></div>
       <div className={scss.playlistTracks}>
-        {results?.map((track: Results, index: React.Key) => {
+        {results?.map((track: Results, index: number) => {
           return (
             <div className={scss.track} key={index}>
               <Image

@@ -2,8 +2,9 @@ import useAuth from "../../../hooks/useAuth";
 import Sidebar from "../Sidebar/Sidebar";
 import Main from "../Main/Main";
 import scss from "./dashboard.module.scss";
+import { DashboardProps } from "../../types";
 
-function Dashboard({ code }) {
+function Dashboard({ code }: DashboardProps) {
   const accessToken = useAuth(code);
 
   if (!accessToken) {

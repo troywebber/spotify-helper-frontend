@@ -9,7 +9,7 @@ import { isActiveAtom } from "../../../atoms/isActive";
 import { albumsAtom } from "../../../atoms/albumsAtom";
 import Tracklist from "../Tracklist/Tracklist";
 import DuplicateFinder from "../DuplicateFinder/DuplicateFinder";
-import { MainProps, PlaylistTracks, SearchResults } from "../../types";
+import { MainProps, PlaylistTracks, Results, SearchResults } from "../../types";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -25,9 +25,7 @@ export default function Main({ accessToken }: MainProps) {
   const albums = useRecoilValue(albumsAtom);
   const isActive = useRecoilValue(isActiveAtom);
   const [searchInput, setSearchInput] = useState("");
-  const [searchResults, setSearchResults] = useState<
-    SearchResults[] | SpotifyApi.TrackObjectFull[]
-  >([]);
+  const [searchResults, setSearchResults] = useState<Results[]>([]);
 
   //random color
   useEffect(() => {
@@ -77,8 +75,6 @@ export default function Main({ accessToken }: MainProps) {
       getSearchResults();
     }
   }, [searchInput]);
-
-  console.log(playlistTracks, "playlistTracks");
 
   if (isActive === "playlists") {
     return (

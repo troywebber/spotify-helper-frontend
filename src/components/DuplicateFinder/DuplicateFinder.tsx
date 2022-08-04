@@ -48,6 +48,7 @@ function DuplicateFinder({ accessToken }: duplicateFinderProps) {
         let limit = 100;
         let total = 0;
         let hasMore = true;
+
         while (hasMore) {
           const response = await spotifyApi.getPlaylistTracks(
             selectedPlaylist,
@@ -70,16 +71,17 @@ function DuplicateFinder({ accessToken }: duplicateFinderProps) {
   //song comparision function to find duplicate songs
   useEffect(() => {
     if (songs.length > 0) {
-      const findDuplicateSongs = (songs: any[]) => {
+      const findDuplicateSongs = (songs: Songs) => {
         const songNames = songs.map(
-          (song: { track: { name: any } }) => song.track.name
+          (song: { track: { name: string } }) => song.track.name
         );
-        const duplicates = songNames.filter((name: any, index: any) => {
+        const duplicates = songNames.filter((name: string, index: number) => {
           return songNames.indexOf(name) !== index;
         });
-        duplicates.forEach((duplicate: any) => {
+
+        duplicates.forEach((duplicate: string) => {
           let duplicateSong = songs.find(
-            (song: { track: { name: any } }) => song.track.name === duplicate
+            (song: { track: { name: string } }) => song.track.name === duplicate
           );
           setDuplicateSongs([...duplicateSongs, duplicateSong]);
         });

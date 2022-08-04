@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export interface duplicateFinderProps {
   accessToken: string;
 }
@@ -8,13 +6,28 @@ export interface MainProps {
   accessToken: string;
 }
 
+export interface DashboardProps {
+  code: string;
+}
+
 export interface Results {
-  artists: any;
-  name: ReactNode;
-  album: any;
-  tracks: {
-    items: any[];
-  };
+  album: SpotifyApi.AlbumObjectSimplified;
+  artists: SpotifyApi.ArtistObjectSimplified[];
+  available_markets: string[];
+  disc_number: number;
+  duration_ms: number;
+  explicit: boolean;
+  external_ids: SpotifyApi.ExternalIdObject;
+  external_urls: SpotifyApi.ExternalUrlObject;
+  href: string;
+  id: string;
+  is_local: boolean;
+  name: string;
+  popularity: number;
+  preview_url: string | null;
+  track_number: number;
+  type: string;
+  uri: string;
 }
 
 export interface DuplicateSongs {
@@ -28,13 +41,14 @@ export interface DuplicateSongs {
 }
 
 export interface Songs {
-  addedAt: string;
-  added_by: SpotifyApi.UserObjectPublic;
-  is_local: boolean;
-  primary_color: string | null;
-  track: SpotifyApi.TrackObjectFull;
-  video_thumbnail: string | null;
-  video_url: string | null;
+  find: any;
+  map: any;
+  added_at?: string;
+  added_by?: SpotifyApi.ShowObjectSimplified;
+  is_local?: boolean;
+  primary_color?: string | null;
+  track?: SpotifyApi.TrackObjectSimplified;
+  video_thumbnail?: string | null;
 }
 
 export interface LikedSongs {
@@ -109,4 +123,9 @@ export interface SearchResults {
   track_number: number;
   type: string;
   uri: string;
+}
+
+export interface Albums {
+  added_at: string;
+  album: SpotifyApi.AlbumObjectFull;
 }

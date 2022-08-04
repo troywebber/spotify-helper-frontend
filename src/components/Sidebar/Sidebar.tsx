@@ -12,6 +12,7 @@ import { currentPlaylist } from "../../../atoms/playlistAtom";
 import { likedSongAtom } from "../../../atoms/likedSongs";
 import { isActiveAtom } from "../../../atoms/isActive";
 import { albumsAtom } from "../../../atoms/albumsAtom";
+import { CurrentPlaylist } from "../../types";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -51,9 +52,7 @@ export default function Sidebar({ accessToken }: SidebarProps) {
   };
 
   //get user current playlist
-  const getCurrentPlaylist = (
-    playlist: SpotifyApi.PlaylistObjectSimplified
-  ) => {
+  const getCurrentPlaylist = (playlist: CurrentPlaylist) => {
     if (accessToken) setCurrentPlaylist(playlist);
     setIsActive("playlists");
   };
@@ -113,7 +112,9 @@ export default function Sidebar({ accessToken }: SidebarProps) {
       <div className={scss.playlists}>
         {playlists.map((playlist) => (
           <p key={playlist.name}>
-            <a onClick={() => getCurrentPlaylist(playlist)}>{playlist.name}</a>
+            <a onClick={() => getCurrentPlaylist(playlist as CurrentPlaylist)}>
+              {playlist.name}
+            </a>
           </p>
         ))}
       </div>
