@@ -10,6 +10,7 @@ import { albumsAtom } from "../../../atoms/albumsAtom";
 import Tracklist from "../Tracklist/Tracklist";
 import DuplicateFinder from "../DuplicateFinder/DuplicateFinder";
 import { MainProps, PlaylistTracks, Results, SearchResults } from "../../types";
+import { randomGradient } from "../../lib/randomGradient";
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -29,15 +30,7 @@ export default function Main({ accessToken }: MainProps) {
 
   //random color
   useEffect(() => {
-    const randomColor = () => {
-      const r = Math.floor(Math.random() * 256);
-      const g = Math.floor(Math.random() * 256);
-      const b = Math.floor(Math.random() * 256);
-      setGradient(
-        `linear-gradient(360deg, rgb(18,18,18) 35%, rgb(${r}, ${g}, ${b}))`
-      );
-    };
-    randomColor();
+    setGradient(randomGradient());
   }, [playlist, isActive]);
 
   // set spotify access token
