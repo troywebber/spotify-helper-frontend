@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Dashboard from "../src/components/Dashboard/Dashboard";
-import Login from "../../spotify-helper-frontend-main/src/components/Login/Login";
+import Login from "../src/components/Login/Login";
+
 
 export default function Home() {
   const [code, setCode] = useState<string | null>("");
