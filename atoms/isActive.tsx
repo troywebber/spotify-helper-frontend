@@ -1,7 +1,6 @@
 import { atom } from "recoil";
-import { IsActive } from "../src/types";
 
-export const isActiveAtom = atom<IsActive | string>({
+export const isActiveAtom = atom<string>({
   key: "isActiveAtom",
   default: "playlists",
 });

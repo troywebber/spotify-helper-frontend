@@ -1,7 +1,6 @@
 import { atom } from "recoil";
-import { Albums } from "../src/types";
 
-export const albumsAtom = atom<Albums[]>({
+export const albumsAtom = atom<any>({
   key: "albumsAtom",
   default: [],
 });
