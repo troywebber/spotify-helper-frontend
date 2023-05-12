@@ -1,11 +1,3 @@
-export interface duplicateFinderProps {
-  accessToken: string;
-}
-
-export interface MainProps {
-  accessToken: string;
-}
-
 export interface DashboardProps {
   code: string;
 }
