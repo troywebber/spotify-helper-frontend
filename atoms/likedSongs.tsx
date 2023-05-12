@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 import { LikedSongs } from "../src/types";
 
-export const likedSongAtom = atom<LikedSongs[] | SpotifyApi.SavedTrackObject[]>(
+export const likedSongAtom = atom<any>(
   {
     key: "likedSongAtom",
     default: [],
